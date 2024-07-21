@@ -38,8 +38,11 @@ public class BruteForce {
         return bestDecryption.toString();
     }
 
+    /**
+     * Логика подсчетка количества совпадений в словаре
+     */
     private static int  countWordMatches(String text, Set<String> dictionary) {
-        String[] words = text.split("\\P{L}+");  // Разделить текст на слова, используя разделители
+        String[] words = text.split("\\P{L}+");  // Разделить текст на слова, используя регулярные выражения
         int matches = 0;
         for (String word : words) {
             if (dictionary.contains(word.toLowerCase())) {
@@ -49,6 +52,9 @@ public class BruteForce {
         return matches;
     }
 
+    /**
+     * подгрузка словаря
+     */
     public static Set<String> loadDictionary(String filePath) {
         Set<String> lines = FileManager.readFileInSet(filePath);
         Set<String> dictionary = new HashSet<>();

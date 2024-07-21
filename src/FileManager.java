@@ -30,7 +30,7 @@ public class FileManager {
                 dictionary.add(line.trim().toLowerCase());
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Не удалось прочитать файл");
         }
         return dictionary;
     }
