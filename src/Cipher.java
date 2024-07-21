@@ -1,8 +1,8 @@
 import java.util.List;
 
 public class Cipher {
-    private List<Character> alphabet;
 
+    private List<Character> alphabet;
     public Cipher(List<Character> alphabet) {
         this.alphabet = alphabet;
     }
@@ -14,11 +14,9 @@ public class Cipher {
         StringBuilder sb = new StringBuilder();
         char[] array = text.toLowerCase().toCharArray();
         for (int i = 0; i < text.length(); i++) {
-
             if (!alphabet.contains(array[i])) {
                 continue;
             }
-
             sb.append(getShiftCharacter(array[i], key));
         }
         return sb.toString();
@@ -34,8 +32,6 @@ public class Cipher {
             if (!alphabet.contains(array[i])) {
                 throw new RuntimeException("Нас взломали!");
             }
-
-
             sb.append(getShiftCharacter(array[i], -key));
         }
         return sb.toString();

@@ -8,22 +8,22 @@ public class Validator {
     /**
      * Проверка ключа
      */
-    public boolean isValidKey(int key, List<Character> alphabet) {
+    public static boolean isValidKey(int key, List<Character> alphabet) {
         return key != 0 && key % alphabet.size() != 0;
     }
 
     /**
      * Проверка существования файла
      */
-    public boolean isFileExists(String filePath) {
+    public static boolean isFileExists(String filePath) {
         Path path = Paths.get(filePath);
         return Files.exists(path);
     }
 
     /**
-     * Проверка валидности алфавита
+     * Проверка валидности алфавита (на будущее)
      */
-    public boolean isValidAlphabet(List<Character> alphabet) {
+    public static boolean isValidAlphabet(List<Character> alphabet) {
         return alphabet != null && !alphabet.isEmpty();
     }
 }
