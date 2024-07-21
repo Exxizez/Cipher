@@ -7,38 +7,47 @@ public class Cipher {
         this.alphabet = alphabet;
     }
 
-    public String encrypt(String text, int shift) {
-        // Логика шифрования
+    /**
+     * Логика шифрования
+     */
+    public String encrypt(String text, int key) {
         StringBuilder sb = new StringBuilder();
-
+        char[] array = text.toLowerCase().toCharArray();
         for (int i = 0; i < text.length(); i++) {
-            char ch = text.charAt(i);
-            if (!alphabet.contains(ch)) {
+
+            if (!alphabet.contains(array[i])) {
                 continue;
             }
-            int position = alphabet.indexOf(ch);
-            char newChar = alphabet.get((position + shift) % alphabet.size());
-            sb.append(newChar);
+
+            sb.append(getShiftCharacter(array[i], key));
         }
         return sb.toString();
     }
 
-    public String decrypt(String encryptedText, int shift) {
-        // Логика расшифровки
+    /**
+     * Логика расшифровки
+     */
+    public String decrypt(String encryptedText, int key) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < encryptedText.length(); i++) {
-            char ch = encryptedText.charAt(i);
-            if (!alphabet.contains(ch)) {
+        char[] array = encryptedText.toLowerCase().toCharArray();
+        for (int i = 0; i < array.length; i++) {
+            if (!alphabet.contains(array[i])) {
                 throw new RuntimeException("Нас взломали!");
             }
 
-            int position = alphabet.indexOf(ch);
-            int temp = (position - shift) % alphabet.size();
-            int realPosition = temp >= 0 ? temp : alphabet.size() + temp;
-            char newChar = alphabet.get(realPosition);
 
-            sb.append(newChar);
+            sb.append(getShiftCharacter(array[i], -key));
         }
         return sb.toString();
+    }
+
+    /**
+     * Получаем символ по ключу
+     */
+    private char getShiftCharacter(char currentChar, int key) {
+        int position = alphabet.indexOf(currentChar);
+        int temp = (position + key) % alphabet.size();
+        int realPosition = temp >= 0 ? temp : alphabet.size() + temp;
+        return alphabet.get(realPosition);
     }
 }
